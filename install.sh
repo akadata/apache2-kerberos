@@ -24,7 +24,7 @@ EOF
 
 docker exec http-service /bin/bash -c "
 apt-get update
-apt install -y ntp krb5-config krb5-user
+apt-get install -y ntp krb5-config krb5-user
 apt-get install -y apache2
 apt-get install -y libapache2-mod-auth-kerb
 apt-get install -y libapache2-mod-auth-gssapi
