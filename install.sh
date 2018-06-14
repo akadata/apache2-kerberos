@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 cd "$(dirname "$0")"
 
 set -e
@@ -10,7 +9,6 @@ if [[ -n "${container_id}" ]]; then
     echo "INFO: Remove http-service container"
     docker rm --force "${container_id}"
 fi
-
 
 docker run -d -it \
   --network=example.com --name=http-service --hostname=http-service.example.com \
@@ -32,6 +30,7 @@ apt-get install -y libapache2-mod-auth-kerb
 apt-get install -y libapache2-mod-auth-gssapi
 mkdir -p /var/www/http-service
 "
+
 # Copy krb5 conf
 docker cp krb5.conf http-service:/etc/krb5.conf
 
@@ -46,7 +45,6 @@ docker cp index.html http-service:/var/www/http-service/index.html
 docker cp http-service-auth-gssapi.conf http-service:/etc/apache2/sites-available/http-service-auth-gssapi.conf
 docker cp http-service-auth-kerb.conf http-service:/etc/apache2/sites-available/http-service-auth-kerb.conf
 
-
 docker exec http-service /bin/bash -c "
 chown www-data:www-data /etc/http-service.keytab
 chmod 400 /etc/http-service.keytab
@@ -56,4 +54,3 @@ service apache2 start
 "
 
 docker exec -it http-service bash
-
