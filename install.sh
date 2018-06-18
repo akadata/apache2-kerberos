@@ -18,7 +18,7 @@ docker run -d -it \
   --network=example.com --name=http-service --hostname=http-service.example.com \
   minimal-ubuntu:latest bash
 
-# Provisioning principal to KDCS and extract keytab
+# Provisioning principal to KDC and extract keytab
 docker exec krb5-kdc-server-example-com /bin/bash -c "
 cat << EOF  | kadmin.local
 add_principal -randkey HTTP/http-service.example.com@EXAMPLE.COM
